@@ -118,6 +118,13 @@ xt_unregister_targets(struct xt_target *target, unsigned int n)
 }
 EXPORT_SYMBOL(xt_unregister_targets);
 
+/*
+*   from http://www.netfilter.org/documentation/HOWTO//netfilter-hacking-HOWTO-4.html
+*   This function should be called. User space could call this by "nf_register_sockopt"
+*   
+*   This function register user define match into xt table in this module. Details refer
+*   to include/linux/netfilter/x_tables.h
+*/
 int xt_register_match(struct xt_match *match)
 {
 	u_int8_t af = match->family;

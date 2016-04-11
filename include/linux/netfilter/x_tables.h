@@ -7,6 +7,14 @@
 #include <uapi/linux/netfilter/x_tables.h>
 
 /**
+*   This is x_tables API of netfilter, include register_match/register_target,
+*   These register_match API use nf_register_sockopt or some thing to
+*   explore to user space.
+*
+*   The uapi/linux/netfilter/x_tables.h response for explore APIs.
+*/
+
+/**
  * struct xt_action_param - parameters for matches/targets
  *
  * @match:	the match extension
@@ -105,6 +113,10 @@ struct xt_tgdtor_param {
 	u_int8_t family;
 };
 
+/**
+*   This is struct used for xt_register_match
+*   refer to http://www.netfilter.org/documentation/HOWTO//netfilter-hacking-HOWTO-4.html
+*/
 struct xt_match {
 	struct list_head list;
 
@@ -116,6 +128,9 @@ struct xt_match {
 	/* Arguments changed since 2.6.9, as this must now handle
 	   non-linear skb, using skb_header_pointer and
 	   skb_ip_make_writable. */
+	/**
+	*   This is call back function which packets matches this rule.
+       */
 	bool (*match)(const struct sk_buff *skb,
 		      struct xt_action_param *);
 

@@ -8,6 +8,17 @@
  * it under the terms of the GNU General Public License version 2 as
  * published by the Free Software Foundation.
  *
+ *  Tow step to extand iptables:
+ *  1. extand kernel module, same as iptables_filter.c.
+ *  2. extand user module, refer to iptables.
+ *
+ *  This is works on kernel module, refer to 
+ *  http://www.netfilter.org/documentation/HOWTO//netfilter-hacking-HOWTO-4.html
+ *
+ *  For init_module and cleanup_module is here. For ipt_register_XXX etc seems in 
+ *  x_tables.c, workflow should be called from user space, pls refer to comments in
+ *  xt_register_match in x_tables.c.
+ *
  */
 
 #include <linux/module.h>
@@ -85,6 +96,7 @@ static int __init iptable_filter_init(void)
 {
 	int ret;
 
+        // This is to register filter table init and exit func into net call trace
 	ret = register_pernet_subsys(&iptable_filter_net_ops);
 	if (ret < 0)
 		return ret;

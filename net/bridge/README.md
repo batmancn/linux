@@ -23,3 +23,8 @@ command: refer to <2>.
 arptable is built-in linux bridge, and is only process ARP packet.
 table and hook point: filter(INPUT, FORWARD, OUTPUT).
 command: refer to <3>.
+
+
+### QoS
+
+TC command on port support QoS on linux bridge, so refer to TC command.
